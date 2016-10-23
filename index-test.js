@@ -159,6 +159,15 @@ describe('reactElementToJSXString(ReactElement)', () => {
 </div>`);
   });
 
+  it('reactElementToJSXString(<div>Hello</div>, {tabStop: 4})', () => {
+    expect(
+        reactElementToJSXString(<div>Hello</div>, {tabStop: 4})
+      ).toEqual(
+  `<div>
+    Hello
+</div>`);
+  });
+
   it('reactElementToJSXString(<div a="1" b="5">Hello</div>)', () => {
     expect(
       reactElementToJSXString(<div a="1" b="5">Hello</div>)
@@ -191,6 +200,18 @@ describe('reactElementToJSXString(ReactElement)', () => {
 </div>`);
   });
 
+  it('reactElementToJSXString(<div><div>Hello</div></div>, {tabStop: 4})', () => {
+    expect(
+      reactElementToJSXString(<div><div>Hello</div></div>, {tabStop: 4})
+    ).toEqual(
+`<div>
+    <div>
+        Hello
+    </div>
+</div>`);
+  });
+
+
   it('reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>)', () => {
     expect(
       reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>)
@@ -205,8 +226,23 @@ describe('reactElementToJSXString(ReactElement)', () => {
 </div>`);
   });
 
+  it('reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>, {tabStop: 4})', () => {
+    expect(
+      reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>, {tabStop: 4})
+    ).toEqual(
+`<div
+    a="1"
+    b="2"
+>
+    <div>
+        Hello
+    </div>
+</div>`);
+  });
+
   // eslint-disable-next-line max-len
-  it('reactElementToJSXString(<div a={{a: "1", b: {c: "3"}}}><div b={{c: {d: "4"}}}>Hello</div></div>, {collapseWhitespace: false})', () => {
+  it('reactElementToJSXString(<div a={{a: "1", b: {c: "3"}}}><div b={{c: {d: "4"}}}>Hello</div></div>, ' +
+     '{collapseWhitespace: false})', () => {
     expect(
       reactElementToJSXString(
         <div a={{a: '1', b: {c: '3'}}}><div b={{c: {d: '4'}}}>Hello</div></div>,
@@ -230,6 +266,34 @@ describe('reactElementToJSXString(ReactElement)', () => {
   >
     Hello
   </div>
+</div>`);
+  });
+
+  it('reactElementToJSXString(<div a={{a: "1", b: {c: "3"}}}><div b={{c: {d: "4"}}}>Hello</div></div>,' +
+     ' {collapseWhitespace: false, tabStop: 4})', () => {
+    expect(
+      reactElementToJSXString(
+        <div a={{a: '1', b: {c: '3'}}}><div b={{c: {d: '4'}}}>Hello</div></div>,
+        {collapseWhitespace: false, tabStop: 4}
+      )
+    ).toEqual(
+`<div
+    a={{
+        a: '1',
+        b: {
+            c: '3'
+        }
+    }}
+>
+    <div
+        b={{
+            c: {
+                d: '4'
+            }
+        }}
+    >
+        Hello
+    </div>
 </div>`);
   });
 
